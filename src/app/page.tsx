@@ -1,9 +1,7 @@
-'use client'
-
-const Home = () => {
+const App = () => {
 	return (
 		<></>
 	)
 }
 
-export default Home
+export default App

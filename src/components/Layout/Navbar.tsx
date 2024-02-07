@@ -9,7 +9,7 @@ export default function Navbar() {
   const menu = [
     {
       title: "Home",
-      path: "/",
+      path: "/home",
     },
     {
       title: "Dashboard",
