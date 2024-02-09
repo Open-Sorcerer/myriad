@@ -6,8 +6,6 @@ const Timeline = (props: any) => {
     return (
         <div className="w-full bg-white/70 p-8 rounded-lg">
             {timelineData
-                // sort by date - reverse if sort=="newest"
-                .sort((a: any, b: any) => (sort === 'newest' ? b.date - a.date : a.date - b.date))
                 .map((entry, index) => (
                     <div key={index} className="py-3">
                         <div className="ps-2 my-2 first:mt-0">
@@ -17,7 +15,7 @@ const Timeline = (props: any) => {
                             .map((event: any, eventIndex: number) => (
                                 <div key={eventIndex}
                                      className="flex gap-x-3 relative group rounded-lg hover:bg-white drop-shadow-md">
-                                    <a className="absolute inset-0 z-[1]" href="#"></a>
+                                    {/*<a className="absolute inset-0 z-[1]" href="#"></a>*/}
                                     <div
                                         className="relative last:after:hidden after:absolute after:top-0 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200">
                                         <div className="relative z-10 w-7 h-7 flex justify-center items-center">
