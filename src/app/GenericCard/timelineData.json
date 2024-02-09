@@ -1,0 +1,40 @@
+[
+  {
+    "date": "1 Aug, 2023",
+    "events": [
+      {
+        "title": "Created 'Fox Studios X MCU - Deadpool' proposal",
+        "description": "Find more detailed instructions here.",
+        "author": {
+          "name": "James Collins",
+          "image": "https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8auto=format&fit=facearea&facepad=3&w=320&h=320&q=80"
+        }
+      },
+      {
+        "title": "Feedback for: Release v5.2.0 quick bug fix 🐞",
+        "author": {
+          "name": "Alex Gregarov",
+          "image": null
+        }
+      },
+      {
+        "title": "Marked 'Stonks Charts' completed",
+        "description": "Finally! You can check it out here.",
+        "author": {
+          "name": "James Collins",
+          "image": "https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80"
+        }
+      }
+    ]
+  },
+  {
+    "date": "31 Jul, 2023",
+    "events": [
+      {
+        "title": "Take a break ⛳️ Touch some grass 🌱",
+        "description": "Just chill for now... 😉",
+        "author": null
+      }
+    ]
+  }
+]

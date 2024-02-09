@@ -18,6 +18,10 @@ export default function Navbar() {
     {
         title: "Bridge",
         path: "/bridge",
+    },
+    {
+        title: "VoteUI",
+        path: "/GenericCard",
     }
   ];
 
