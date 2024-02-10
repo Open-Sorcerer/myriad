@@ -47,7 +47,7 @@ const DashboardPage = () => {
 	]
 
 	return (
-		<div className="w-full h-fit z-0 flex flex-col justify-start items-center gap-10 relative py-24 px-24 overflow-y-scroll">
+		<div className="w-full h-fit z-0 flex flex-col justify-start items-center gap-10 relative py-24 px-24">
 			<div className="widget-base flex justify-center bg-white/95 text-5xl p-4">
 				<div className="flex items-center gap-12">
 					{/* Net worth */}

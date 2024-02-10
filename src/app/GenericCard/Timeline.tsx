@@ -1,6 +1,7 @@
 import React from 'react';
 import timelineData from './timelineData.json';
-import { Proposal } from 'common';
+import {Proposal} from 'common';
+import ProposalDrawer from "./ProposalDrawer";
 
 const Timeline = (props: any) => {
     const {search, sort} = props;
@@ -44,6 +45,7 @@ const Timeline = (props: any) => {
                                             </button>
                                         )}
                                     </div>
+                                    <ProposalDrawer proposal={event}/>
                                     <div
                                         className="inline-flex place-self-center m-3 flex-col h-fit border border-gray-200 rounded-full p-0.5">
                                         <button type="button"

@@ -1,5 +1,5 @@
-import { tap } from '@/lib/utils'
-import Session from '@/lib/session'
+import { tap } from '@lib/utils'
+import Session from '@lib/session'
 import { NextRequest, NextResponse } from 'next/server'
 import { SiweErrorType, SiweMessage, generateNonce } from 'siwe'
 
