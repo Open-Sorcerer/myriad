@@ -1,5 +1,6 @@
 import React from 'react';
 import timelineData from './timelineData.json';
+import { Proposal } from 'common';
 
 const Timeline = (props: any) => {
     const {search, sort} = props;
@@ -12,7 +13,7 @@ const Timeline = (props: any) => {
                             <h3 className="text-xs font-medium uppercase text-gray-500">{entry.date}</h3>
                         </div>
                         {entry.events
-                            .map((event: any, eventIndex: number) => (
+                            .map((event: Proposal, eventIndex: number) => (
                                 <div key={eventIndex}
                                      className="flex gap-x-3 relative group rounded-lg hover:bg-white drop-shadow-md">
                                     {/*<a className="absolute inset-0 z-[1]" href="#"></a>*/}
