@@ -31,7 +31,7 @@ export default function Navbar() {
 			<nav className="flex w-full items-center justify-between p-4 lg:px-6 fixed top-0 z-50 bg-black/80">
 				<div className="block flex-none md:hidden">{/*<HamburgerMenu menu={menu} />*/}</div>
 				<div className="flex w-full justify-between items-center">
-					<div className="flex w-full md:w-1/3">
+					<div className="flex w-fit">
 						<Link
 							href="/"
 							className="mr-2 flex flex-row w-full items-center justify-center md:w-auto lg:mr-6 divide-x"
@@ -58,7 +58,7 @@ export default function Navbar() {
 						)}
 					</div>
 					<FarcasterProvider>
-						<div className="flex justify-end md:w-1/3">
+						<div className="inline-flex w-fit">
 							<SignInButton
 								onSuccess={({ fid, username }) => {
 									console.log('details', fid, username)

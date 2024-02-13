@@ -1,6 +1,7 @@
 'use client'
 import DAOGrid from "./DAOGrid";
 import {useState} from "react";
+import CreateDAO from "./CreateDAO";
 
 const Home = () => {
     const [search, setSearch] = useState('');
@@ -11,7 +12,7 @@ const Home = () => {
                 <h1 className="text-4xl font-bold">DAOs</h1>
                 <div className="w-full flex justify-end gap-3 items-center">
                     <div className="w-fit h-full">
-                        <div className="relative">
+                        <div className="relative rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                             <div
                                 className="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4 peer-disabled:opacity-50 peer-disabled:pointer-events-none">
                                 <svg className="flex-shrink-0 w-4 h-4 text-gray-500"
@@ -28,7 +29,7 @@ const Home = () => {
                                    onChange={(e) => setSearch(e.target.value)}/>
                         </div>
                     </div>
-
+                    <CreateDAO />
                 </div>
             </div>
             <DAOGrid search={search}/>
