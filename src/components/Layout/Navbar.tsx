@@ -1,8 +1,9 @@
 'use client'
 import Link from 'next/link'
+import { useStore } from '@store'
 // import LogoSquare from "@components/LogoSquare";
-import { ConnectKitButton } from 'connectkit'
 import { SignInButton } from '@farcaster/auth-kit'
+import { Identity } from '@semaphore-protocol/identity'
 import { FarcasterProvider } from '@components/FarcasterProvider'
 // import HamburgerMenu from "./HamburgerMenu";
 
@@ -25,6 +26,7 @@ export default function Navbar() {
 			path: '/GenericCard',
 		},
 	]
+	const setIdentity = useStore(state => state.setIdentity)
 
 	return (
 		<>
@@ -60,8 +62,10 @@ export default function Navbar() {
 					<FarcasterProvider>
 						<div className="inline-flex w-fit">
 							<SignInButton
-								onSuccess={({ fid, username }) => {
-									console.log('details', fid, username)
+								onSuccess={async ({ fid, username }) => {
+									const identity = await new Identity(fid)
+									setIdentity(identity)
+									console.log('details', fid, username, identity.commitment)
 								}}
 							/>
 						</div>
