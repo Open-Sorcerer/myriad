@@ -63,7 +63,7 @@ export default function Navbar() {
 						<div className="inline-flex w-fit">
 							<SignInButton
 								onSuccess={async ({ fid, username }) => {
-									const identity = await new Identity(fid)
+									const identity = new Identity(fid)
 									setIdentity(identity)
 									console.log('details', fid, username, identity.commitment)
 								}}
