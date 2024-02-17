@@ -22,7 +22,7 @@ const CreateDAO = () => {
 	const { identity } = useStore()
 
 	const createDAO = async (dao: Group) => {
-		const { error } = await fetch('/api/createDAO', {
+		await fetch('/api/createDAO', {
 			method: 'POST',
 			body: JSON.stringify({
 				name: daoName,
@@ -34,16 +34,15 @@ const CreateDAO = () => {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-		}).then(async res => {
-			const data = await res.json()
-			console.log('🚀 ~ DB response: ', data)
-			return data
 		})
-		if (error) {
-			console.error('Create DAO', error)
-		} else {
-			toast.success('DAO created successfully')
-		}
+			.then(async res => {
+				const data = await res.json()
+				console.log('🚀 ~ DB response: ', data)
+				toast.success('DAO created successfully')
+			})
+			.catch(error => {
+				console.error('🚀 ~ DB error: ', error)
+			})
 	}
 
 	return (
