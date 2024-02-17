@@ -2,7 +2,7 @@ import React from 'react';
 import timelineData from './timelineData.json';
 import {Proposal} from 'common';
 import ProposalDrawer from "./ProposalDrawer";
-import {ChevronRightIcon} from "@radix-ui/react-icons";
+import Image from "next/image";
 
 const Timeline = (props: any) => {
     const {search, sort} = props;
@@ -49,8 +49,10 @@ const Timeline = (props: any) => {
                                     <div
                                         className="inline-flex place-self-center m-3 flex-col h-fit gap-1">
                                         <button
-                                            className="inline-flex justify-between items-center py-1 px-3 w-24 h-fit place-self-center gap-2 whitespace-nowrap border border-transparent bg-primary shadow-sm text-white hover:bg-black  disabled:opacity-50 disabled:pointer-events-none rounded-full">Cast <ChevronRightIcon
-                                            className="h-4 w-4"/></button>
+                                            className="inline-flex justify-between items-center py-1 px-3 w-24 h-fit place-self-center gap-2 whitespace-nowrap border border-transparent bg-primary shadow-sm text-white hover:bg-black  disabled:opacity-50 disabled:pointer-events-none rounded-full">
+                                            Cast
+                                            <Image alt="farcaster logo" src="/farcaster.svg" width={20} height={20}/>
+                                        </button>
                                         <ProposalDrawer proposal={event}/>
                                     </div>
                                     <div
