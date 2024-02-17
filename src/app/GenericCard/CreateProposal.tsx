@@ -16,7 +16,7 @@ const CreateDAO = () => {
         <Drawer>
             <DrawerTrigger asChild>
                 <button type="button"
-                        className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-[#1B1F3B] shadow-sm text-white hover:bg-black  disabled:opacity-50 disabled:pointer-events-none">
+                        className="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary shadow-sm text-white hover:bg-black  disabled:opacity-50 disabled:pointer-events-none">
                     Create Proposal
                 </button>
             </DrawerTrigger>

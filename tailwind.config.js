@@ -10,7 +10,15 @@ module.exports = {
         "./src/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                primary: "#1B1F3B",
+                secondary: {
+                    DEFAULT:"#FFEBFE",
+                    lite: "#FDEAFC",
+                },
+            }
+        },
     },
     plugins: [
         require('preline/plugin'),

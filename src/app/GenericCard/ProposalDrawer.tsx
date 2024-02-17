@@ -66,7 +66,7 @@ const ProposalDrawer = (props: { proposal: Proposal; }) => {
     return (
         <Drawer>
             <DrawerTrigger asChild>
-                <button className="flex items-center py-2 px-3 w-fit h-fit place-self-center gap-2 whitespace-nowrap border border-gray-200 rounded-full">More <ChevronRightIcon className="h-4 w-4"/></button>
+                <button className="inline-flex justify-between items-center py-1 px-3 w-24 h-fit place-self-center gap-2 whitespace-nowrap bg-secondary border border-gray-200 hover:shadow-inner hover:bg-secondary-lite rounded-full">More <ChevronRightIcon className="h-4 w-4"/></button>
             </DrawerTrigger>
             <DrawerContent>
                 <div className="mx-auto w-full max-w-sm">

@@ -2,6 +2,7 @@ import React from 'react';
 import timelineData from './timelineData.json';
 import {Proposal} from 'common';
 import ProposalDrawer from "./ProposalDrawer";
+import {ChevronRightIcon} from "@radix-ui/react-icons";
 
 const Timeline = (props: any) => {
     const {search, sort} = props;
@@ -45,9 +46,15 @@ const Timeline = (props: any) => {
                                             </button>
                                         )}
                                     </div>
-                                    <ProposalDrawer proposal={event}/>
                                     <div
-                                        className="inline-flex place-self-center m-3 flex-col h-fit border border-gray-200 rounded-full p-0.5">
+                                        className="inline-flex place-self-center m-3 flex-col h-fit gap-1">
+                                        <button
+                                            className="inline-flex justify-between items-center py-1 px-3 w-24 h-fit place-self-center gap-2 whitespace-nowrap border border-transparent bg-primary shadow-sm text-white hover:bg-black  disabled:opacity-50 disabled:pointer-events-none rounded-full">Cast <ChevronRightIcon
+                                            className="h-4 w-4"/></button>
+                                        <ProposalDrawer proposal={event}/>
+                                    </div>
+                                    <div
+                                        className="inline-flex place-self-center m-3 flex-col h-fit border border-gray-200 bg-secondary shadow-sm rounded-full p-0.5">
                                         <button type="button"
                                                 className="inline-flex flex-shrink-0 justify-center items-center h-8 w-8 rounded-full text-gray-500 hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                             <svg className="flex-shrink-0 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
