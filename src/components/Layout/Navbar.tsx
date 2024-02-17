@@ -1,11 +1,9 @@
 'use client'
 import Link from 'next/link'
 import { useStore } from '@store'
-// import LogoSquare from "@components/LogoSquare";
 import { SignInButton } from '@farcaster/auth-kit'
 import { Identity } from '@semaphore-protocol/identity'
 import { FarcasterProvider } from '@components/FarcasterProvider'
-// import HamburgerMenu from "./HamburgerMenu";
 
 export default function Navbar() {
 	const menu = [
@@ -16,10 +14,6 @@ export default function Navbar() {
 		{
 			title: 'Dashboard',
 			path: '/dashboard',
-		},
-		{
-			title: 'Bridge',
-			path: '/bridge',
 		},
 		{
 			title: 'VoteUI',
