@@ -1,6 +1,7 @@
 import { useStore } from '@store'
-import client from '@components/db'
 import React, { useState } from 'react'
+import { toast } from 'react-hot-toast'
+import { Group } from '@semaphore-protocol/group'
 import {
 	Drawer,
 	DrawerClose,
@@ -82,8 +83,42 @@ const CreateDAO = () => {
 					<DrawerFooter>
 						<button
 							type="button"
-							onClick={async () => {}}
+							onClick={async () => {
+								if (daoName && daoDescription && daoImage && identity?.commitment) {
+									const dao = new Group(identity?.commitment)
+									dao.addMember(identity?.commitment)
+									const { error } = await fetch('/api/createDAO', {
+										method: 'POST',
+										body: JSON.stringify({
+											name: daoName,
+											description: daoDescription,
+											image: daoImage,
+											dao: dao.root,
+											creator: identity?.commitment,
+										}),
+										headers: {
+											'Content-Type': 'application/json',
+										},
+									}).then(async res => {
+										const data = await res.json()
+										console.log('🚀 ~ DB response: ', data)
+										return data
+									})
+									if (error) {
+										console.error('Create DAO', error)
+									} else {
+										toast.success('DAO created successfully')
+									}
+								} else {
+									if (!identity?.commitment) {
+										toast.error('Please sign in with Farcaster')
+										return
+									}
+									toast.error('Please fill all the fields')
+								}
+							}}
 							className="py-3 px-4 inline-flex items-center justify-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-[#1B1F3B] shadow-sm text-white hover:bg-black  disabled:opacity-50 disabled:pointer-events-none"
+							disabled={isImageUploading}
 						>
 							{isImageUploading ? 'Uploading Image...' : 'Create DAO'}
 						</button>
