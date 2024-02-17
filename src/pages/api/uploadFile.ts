@@ -15,7 +15,7 @@ const uploadFile = async (req: NextApiRequest, res: NextApiResponse) => {
 		if (err) {
 			console.error(err)
 			return res.status(500).json({ error: err })
-		} 
+		}
 
 		const { image } = files
 

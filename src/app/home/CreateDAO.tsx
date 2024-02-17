@@ -1,5 +1,6 @@
 import { useStore } from '@store'
 import React, { useState } from 'react'
+import { customAlphabet } from 'nanoid'
 import { toast } from 'react-hot-toast'
 import { Group } from '@semaphore-protocol/group'
 import {
@@ -19,6 +20,31 @@ const CreateDAO = () => {
 	const [isImageUploading, setIsImageUploading] = useState(false)
 	const [daoImage, setDaoImage] = useState('')
 	const { identity } = useStore()
+
+	const createDAO = async (dao: Group) => {
+		const { error } = await fetch('/api/createDAO', {
+			method: 'POST',
+			body: JSON.stringify({
+				name: daoName,
+				description: daoDescription,
+				image: daoImage,
+				dao: dao.root.toString(),
+				creator: identity?.commitment?.toString(),
+			}),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}).then(async res => {
+			const data = await res.json()
+			console.log('🚀 ~ DB response: ', data)
+			return data
+		})
+		if (error) {
+			console.error('Create DAO', error)
+		} else {
+			toast.success('DAO created successfully')
+		}
+	}
 
 	return (
 		<Drawer>
@@ -84,31 +110,11 @@ const CreateDAO = () => {
 						<button
 							type="button"
 							onClick={async () => {
-								if (daoName && daoDescription && daoImage && identity?.commitment) {
-									const dao = new Group(identity?.commitment)
+								if (daoName && daoDescription && identity?.commitment) {
+									const nanoId = customAlphabet('1234567890', 10)
+									const dao = new Group(nanoId())
 									dao.addMember(identity?.commitment)
-									const { error } = await fetch('/api/createDAO', {
-										method: 'POST',
-										body: JSON.stringify({
-											name: daoName,
-											description: daoDescription,
-											image: daoImage,
-											dao: dao.root,
-											creator: identity?.commitment,
-										}),
-										headers: {
-											'Content-Type': 'application/json',
-										},
-									}).then(async res => {
-										const data = await res.json()
-										console.log('🚀 ~ DB response: ', data)
-										return data
-									})
-									if (error) {
-										console.error('Create DAO', error)
-									} else {
-										toast.success('DAO created successfully')
-									}
+									await createDAO(dao)
 								} else {
 									if (!identity?.commitment) {
 										toast.error('Please sign in with Farcaster')

@@ -5,6 +5,7 @@ import CreateDAO from "./CreateDAO";
 
 const Home = () => {
     const [search, setSearch] = useState('');
+
     return (
         <div
             className="w-full h-fit z-0 flex flex-col justify-start items-center gap-10 relative py-24 px-24">
