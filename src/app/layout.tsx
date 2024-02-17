@@ -4,6 +4,7 @@ import Spliner from '@components/Spliner'
 import { FC, PropsWithChildren } from 'react'
 import Navbar from '@components/Layout/Navbar'
 import PrelineScript from '@components/PrelineScript'
+import { Toaster } from 'react-hot-toast'
 
 const RootLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
 	return (
@@ -14,6 +15,7 @@ const RootLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
 					<Navbar />
 					<Spliner />
 					{children}
+					<Toaster />
 				</div>
 			</body>
 		</html>
