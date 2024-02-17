@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@farcaster/auth-kit':
     specifier: ^0.2.0
@@ -14,9 +10,12 @@ dependencies:
   '@radix-ui/react-icons':
     specifier: ^1.3.0
     version: 1.3.0(react@18.2.0)
+  '@semaphore-protocol/group':
+    specifier: '3'
+    version: 3.0.0
   '@semaphore-protocol/identity':
-    specifier: 4.0.0-alpha.7
-    version: 4.0.0-alpha.7
+    specifier: '3'
+    version: 3.0.0
   '@spheron/storage':
     specifier: ^2.0.4
     version: 2.0.4
@@ -77,6 +76,9 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
+  react-hot-toast:
+    specifier: ^2.4.1
+    version: 2.4.1(csstype@3.1.3)(react-dom@18.2.0)(react@18.2.0)
   recharts:
     specifier: ^2.12.0
     version: 2.12.0(react-dom@18.2.0)(react@18.2.0)
@@ -479,6 +481,52 @@ packages:
   /@eslint/js@8.40.0:
     resolution: {integrity: sha512-ElyB54bJIhXQYVKjDSvCkPO1iU1tSAeVQJbllWJq1XQSmmA4dgFk8CbiBGpiOPxleE48vDogxCtmMYku4HSVLA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: false
+
+  /@ethersproject/bignumber@5.7.0:
+    resolution: {integrity: sha512-n1CAdIHRWjSucQO3MC1zPSVgV/6dy/fjL9pMrPP9peL+QxEg9wOsVqwD4+818B6LUEtaXzVHQiuivzRoxPxUGw==}
+    dependencies:
+      '@ethersproject/bytes': 5.7.0
+      '@ethersproject/logger': 5.7.0
+      bn.js: 5.2.1
+    dev: false
+
+  /@ethersproject/bytes@5.7.0:
+    resolution: {integrity: sha512-nsbxwgFXWh9NyYWo+U8atvmMsSdKJprTcICAkvbBffT75qDocbuggBU0SJiVK2MuTrp0q+xvLkTnGMPK1+uA9A==}
+    dependencies:
+      '@ethersproject/logger': 5.7.0
+    dev: false
+
+  /@ethersproject/constants@5.7.0:
+    resolution: {integrity: sha512-DHI+y5dBNvkpYUMiRQyxRBYBefZkJfo70VUkUAsRjcPs47muV9evftfZ0PJVCXYbAiCgght0DtcF9srFQmIgWA==}
+    dependencies:
+      '@ethersproject/bignumber': 5.7.0
+    dev: false
+
+  /@ethersproject/keccak256@5.7.0:
+    resolution: {integrity: sha512-2UcPboeL/iW+pSg6vZ6ydF8tCnv3Iu/8tUmLLzWWGzxWKFFqOBQFLo6uLUv6BDrLgCDfN28RJ/wtByx+jZ4KBg==}
+    dependencies:
+      '@ethersproject/bytes': 5.7.0
+      js-sha3: 0.8.0
+    dev: false
+
+  /@ethersproject/logger@5.7.0:
+    resolution: {integrity: sha512-0odtFdXu/XHtjQXJYA3u9G0G8btm0ND5Cu8M7i5vhEcE8/HmF4Lbdqanwyv4uQTr2tx6b7fQRmgLrsnpQlmnig==}
+    dev: false
+
+  /@ethersproject/random@5.7.0:
+    resolution: {integrity: sha512-19WjScqRA8IIeWclFme75VMXSBvi4e6InrUNuaR4s5pTF2qNhcGdCUwdxUVGtDDqC00sDLCO93jPQoDUH4HVmQ==}
+    dependencies:
+      '@ethersproject/bytes': 5.7.0
+      '@ethersproject/logger': 5.7.0
+    dev: false
+
+  /@ethersproject/strings@5.7.0:
+    resolution: {integrity: sha512-/9nu+lj0YswRNSH0NXYqrh8775XNyEdUQAuf3f+SmOrnVewcJ5SBNAjF7lpgehKi4abvNNXyf+HX86czCdJ8Mg==}
+    dependencies:
+      '@ethersproject/bytes': 5.7.0
+      '@ethersproject/constants': 5.7.0
+      '@ethersproject/logger': 5.7.0
     dev: false
 
   /@farcaster/auth-client@0.1.0(viem@1.21.4):
@@ -1336,11 +1384,24 @@ packages:
       '@scure/base': 1.1.5
     dev: false
 
-  /@semaphore-protocol/identity@4.0.0-alpha.7:
-    resolution: {integrity: sha512-L08aqRn59gZaLjYa71Jp1921ZNa4Ne0dH1hm2af3qTNO6i5gel9meoBG72bZGdvsBmYRy4P3y8BS/8zhUvW5+g==}
+  /@semaphore-protocol/group@3.0.0:
+    resolution: {integrity: sha512-RU6Xt7797ctljjvYOo4on+4FEjImO4pXu0+enXCN25bRkurHs8r5dJPK1iIe1v5mFqKred+mxxp0fGA0aTFt9A==}
     dependencies:
-      '@zk-kit/eddsa-poseidon': 0.4.1
-      poseidon-lite: 0.2.0
+      '@ethersproject/bignumber': 5.7.0
+      '@ethersproject/bytes': 5.7.0
+      '@ethersproject/keccak256': 5.7.0
+      '@zk-kit/incremental-merkle-tree': 1.0.0
+      poseidon-lite: 0.0.2
+    dev: false
+
+  /@semaphore-protocol/identity@3.0.0:
+    resolution: {integrity: sha512-qZtudIFTy053Wk1c38VgnkLw4GEYlZZz0VkkDdFXEOfJxqS/3S7gKupR88AMSDA0FBgPA9rFGAx31Yvjky460g==}
+    dependencies:
+      '@ethersproject/bignumber': 5.7.0
+      '@ethersproject/keccak256': 5.7.0
+      '@ethersproject/random': 5.7.0
+      '@ethersproject/strings': 5.7.0
+      poseidon-lite: 0.0.2
     dev: false
 
   /@solana/buffer-layout@4.0.1:
@@ -2517,8 +2578,8 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /@zk-kit/eddsa-poseidon@0.4.1:
-    resolution: {integrity: sha512-RG9qoFw9FhmVdw9pG6gom+9kJ2dZ1hpA3ARn+9Ah8irGYoRF80c2d5anCtI3vxtImQn3Fuw0WenXAcSKIKfJnA==}
+  /@zk-kit/incremental-merkle-tree@1.0.0:
+    resolution: {integrity: sha512-2iRLZfHnZ6wKE+oZN2CnpkKYCE5f5dpv6YRIwLDCz0xwJZrIMQ81AamFBdxPesQSYMMP0GkC0iv1rm6gxAL2Ow==}
     dev: false
 
   /JSONStream@1.3.5:
@@ -4271,6 +4332,14 @@ packages:
       slash: 3.0.0
     dev: false
 
+  /goober@2.1.14(csstype@3.1.3):
+    resolution: {integrity: sha512-4UpC0NdGyAFqLNPnhCT2iHpza2q+RAY3GV85a/mRPdzyPQMsj0KmMMuetdIkzWRbJ+Hgau1EZztq8ImmiMGhsg==}
+    peerDependencies:
+      csstype: ^3.0.10
+    dependencies:
+      csstype: 3.1.3
+    dev: false
+
   /gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
     dependencies:
@@ -4785,6 +4854,10 @@ packages:
 
   /js-sdsl@4.4.2:
     resolution: {integrity: sha512-dwXFwByc/ajSV6m5bcKAPwe4yDDF6D614pxmIi5odytzxRlwqF6nwoiCek80Ixc7Cvma5awClxrzFtxCQvcM8w==}
+    dev: false
+
+  /js-sha3@0.8.0:
+    resolution: {integrity: sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==}
     dev: false
 
   /js-tokens@4.0.0:
@@ -5572,8 +5645,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /poseidon-lite@0.2.0:
-    resolution: {integrity: sha512-vivDZnGmz8W4G/GzVA72PXkfYStjilu83rjjUfpL4PueKcC8nfX6hCPh2XhoC5FBgC6y0TA3YuUeUo5YCcNoig==}
+  /poseidon-lite@0.0.2:
+    resolution: {integrity: sha512-bGdDPTOQkJbBjbtSEWc3gY+YhqlGTxGlZ8041F8TGGg5QyGGp1Cfs4b8AEnFFjHbkPg6WdWXUgEjU1GKOKWAPw==}
     dev: false
 
   /postcss-import@15.1.0(postcss@8.4.33):
@@ -5787,6 +5860,20 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hot-toast@2.4.1(csstype@3.1.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-j8z+cQbWIM5LY37pR6uZR6D4LfseplqnuAO4co4u8917hBUvXlEqyP1ZzqVLcqoyUesZZv/ImreoCeHVDpE5pQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      goober: 2.1.14(csstype@3.1.3)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - csstype
     dev: false
 
   /react-is@16.13.1:
@@ -7224,3 +7311,7 @@ packages:
       react: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

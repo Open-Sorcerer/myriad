@@ -1,26 +1,23 @@
 import client from '@components/db'
-import { nanoid, customAlphabet } from 'nanoid'
 import { NextApiRequest, NextApiResponse } from 'next'
-import { Identity } from '@semaphore-protocol/identity'
 
 interface BodyType {
 	name: string
 	description: string
 	image: string
-	id: string
+	dao: string
+	creator: string
 }
 
 const createDAOHandler = async (req: NextApiRequest, res: NextApiResponse) => {
-	const { name, description, image, id } = req.body as BodyType
-
-	const nanoid = customAlphabet('1234567890', 10)
+	const { name, description, image, dao, creator } = req.body as BodyType
 
 	const { error } = await client.from('DAO').insert({
 		name,
 		description,
 		image,
-		creator: id,
-		id: nanoid(),
+		creator: creator,
+		id: dao,
 	})
 
 	if (error) {
