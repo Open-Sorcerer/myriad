@@ -12,10 +12,6 @@ export default function Navbar() {
             path: '/home',
         },
         {
-            title: 'Dashboard',
-            path: '/dashboard',
-        },
-        {
             title: 'VoteUI',
             path: '/GenericCard',
         },
