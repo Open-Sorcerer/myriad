@@ -7,8 +7,8 @@ interface Props {
 export const FarcasterProvider = ({ children }: Props) => {
 	const config = {
 		rpcUrl: 'https://mainnet.optimism.io',
-		domain: 'example.com',
-		siweUri: 'https://example.com/login',
+		domain: 'myriad-zk.vercel.app',
+		siweUri: 'https://myriad-zk.vercel.app',
 	}
 	return <AuthKitProvider config={config}>{children}</AuthKitProvider>
 }
