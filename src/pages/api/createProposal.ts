@@ -5,15 +5,18 @@ interface BodyType {
 	title: string
 	description: string
 	dao: string
+	expiry: Date
 }
 
 const createProposalHandler = async (req: NextApiRequest, res: NextApiResponse) => {
-	const { title, description, dao } = req.body as BodyType
+	const { title, description, dao, expiry } = req.body as BodyType
 
 	const { error } = await client.from('Proposal').insert({
 		title,
 		description,
 		dao,
+		expiry,
+		votes: 0,
 	})
 
 	if (error) {

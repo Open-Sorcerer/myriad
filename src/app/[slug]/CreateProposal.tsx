@@ -12,9 +12,11 @@ import {
 	DrawerTrigger,
 } from '@components/ui/drawer'
 
-const CreateDAO = () => {
+const CreateDAO = (props: any) => {
+	const { dao } = props
 	const [title, setTitle] = useState('')
 	const [description, setDescription] = useState('')
+	const [expiry, setExpiry] = useState<Date>()
 	const { identity } = useStore()
 	const createProposal = async () => {
 		await fetch('/api/createProposal', {
@@ -22,7 +24,8 @@ const CreateDAO = () => {
 			body: JSON.stringify({
 				title,
 				description,
-				dao: 'rootstring',
+				dao: dao,
+				expiry: expiry,
 			}),
 			headers: {
 				'Content-Type': 'application/json',
@@ -38,6 +41,7 @@ const CreateDAO = () => {
 				console.error('🚀 ~ DB error: ', error)
 			})
 	}
+
 	return (
 		<Drawer>
 			<DrawerTrigger asChild>
@@ -70,6 +74,16 @@ const CreateDAO = () => {
 								onChange={(e: any) => setDescription(e.target.value)}
 								value={description}
 							/>
+							<input
+								type="date"
+								className="w-full py-3 px-4 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+								placeholder="Proposal Deadline"
+								onChange={(e: any) => {
+									setExpiry(e.target.value)
+								}}
+								value={expiry as any}
+								min={new Date().toISOString().split('T')[0]}
+							/>
 						</form>
 					</div>
 					<DrawerFooter>
@@ -77,14 +91,14 @@ const CreateDAO = () => {
 							type="button"
 							className="py-3 px-4 inline-flex items-center justify-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-[#1B1F3B] shadow-sm text-white hover:bg-black  disabled:opacity-50 disabled:pointer-events-none"
 							onClick={() => {
-								if (title && description) {
+								if (title && description && expiry && identity?.commitment) {
 									createProposal()
 								} else {
 									if (!identity?.commitment) {
 										toast.error('Please sign in with Farcaster')
 										return
 									}
-									toast.error('Title and Description are required')
+									toast.error('Please fill the all the fields')
 								}
 							}}
 						>

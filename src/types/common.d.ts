@@ -8,10 +8,8 @@ declare module 'common' {
     export type Proposal = {
         title: string;
         description?: string;
-        author: {
-            name: string;
-            image: string | null;
-        } | null;
-        timestamp?: Date;
+        dao: string;
+        expiry?: Date;
+        votes?: number;
     }
 }

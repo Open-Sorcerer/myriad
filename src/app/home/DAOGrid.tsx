@@ -11,9 +11,7 @@ interface DAO {
 
 const DaoGrid = (props: { myDAOs: boolean }) => {
 	const { search } = useStore()
-
 	const [daoList, setDaoList] = React.useState<DAO[]>([])
-
 	const { identity } = useStore()
 
 	useEffect(() => {

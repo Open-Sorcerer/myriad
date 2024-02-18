@@ -1,17 +1,34 @@
 'use client'
 import Timeline from './Timeline'
-import React, { useState } from 'react'
 import CreateProposal from './CreateProposal'
+import React, { useEffect, useState } from 'react'
 
-// TODO: Implement the GenericCard component dynamically and remove this placeholder component
-const GenericCard = () => {
+interface DAO {
+	name: string
+	image: string
+	id: string
+}
+
+export default function Page({ params }: { params: { slug: string } }): React.JSX.Element {
 	const [search, setSearch] = useState('')
 	const [filter, setFilter] = useState('all')
 	const [sort, setSort] = useState('newest')
+	const [daoName, setDaoName] = useState('')
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const apiResponse = await fetch('/api/getDAOs')
+			const DAOList = (await apiResponse.json()).data as DAO[]
+			const dao = DAOList.find(dao => dao.id === params.slug)
+			setDaoName(dao?.name || 'DAO')
+		}
+		fetchData()
+	}, [params.slug])
+
 	return (
 		<div className="w-full h-fit z-0 flex flex-col justify-start items-center gap-10 relative py-24 px-24">
 			<div className="flex w-full h-full justify-between items-center z-10">
-				<h1 className="text-4xl font-bold">MangoDAO</h1>
+				<h1 className="text-4xl font-bold">{daoName}</h1>
 				<div className="flex w-fit h-full gap-5">
 					{/* Search Bar */}
 					<div className="relative rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
@@ -127,16 +144,12 @@ const GenericCard = () => {
 							</li>
 						</ul>
 					</div>
-					<CreateProposal />
+					<CreateProposal  dao={params.slug} />
 				</div>
 			</div>
 
 			{/*  Rest  */}
-			<Timeline search={search} sort={sort} />
+			<Timeline dao={params.slug} />
 		</div>
 	)
 }
-
-GenericCard.propTypes = {}
-
-export default GenericCard
