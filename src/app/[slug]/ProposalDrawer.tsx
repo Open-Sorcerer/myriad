@@ -1,7 +1,10 @@
-import React from 'react'
+import { useStore } from '@store'
 import { Proposal } from 'common'
+import toast from 'react-hot-toast'
+import React, { useEffect, useState } from 'react'
+import { generateProof } from '@semaphore-protocol/proof'
 import { Bar, BarChart, ResponsiveContainer } from 'recharts'
-import { ChevronRightIcon, MinusIcon, PlusIcon } from '@radix-ui/react-icons'
+import { ChevronRightIcon, DoubleArrowDownIcon, DoubleArrowUpIcon } from '@radix-ui/react-icons'
 import {
 	Drawer,
 	DrawerClose,
@@ -55,48 +58,85 @@ const data = [
 	},
 ]
 
-const ProposalDrawer = (props: { proposal: Proposal }) => {
-	const { proposal } = props
-	const [goal, setGoal] = React.useState(350)
+function ProposalDrawer(props: any) {
+	const { upvote, downvote, dao, group } = props
+	const [vote, setVote] = useState('')
+	const { identity } = useStore()
+	const signal = (vote === 'upvote' ? 1 : vote === 'downvote' && 1) as number
 
-	function onClick(adjustment: number) {
-		setGoal(Math.max(200, Math.min(400, goal + adjustment)))
+	const handleSubmit = async () => {
+		try {
+			const fullProof = await generateProof(identity, group, dao, signal)
+		} catch (error) {
+			console.error('🚀 ~ error', error)
+		}
+		toast.success('Vote casted successfully')
 	}
 
 	return (
 		<Drawer>
 			<DrawerTrigger asChild>
 				<button className="inline-flex justify-between items-center py-1 px-3 w-24 h-fit place-self-center gap-2 whitespace-nowrap bg-secondary border border-gray-200 hover:shadow-inner hover:bg-secondary-lite rounded-full">
-					More <ChevronRightIcon className="h-4 w-4" />
+					Vote <ChevronRightIcon className="h-4 w-4" />
 				</button>
 			</DrawerTrigger>
 			<DrawerContent>
 				<div className="mx-auto w-full max-w-sm">
 					<DrawerHeader>
-						<DrawerTitle>Move Goal</DrawerTitle>
+						<DrawerTitle>Cast your vote anonymously</DrawerTitle>
 						<DrawerDescription>Set your contribution to the proposal.</DrawerDescription>
 					</DrawerHeader>
 					<div className="p-4 pb-0">
 						<div className="flex items-center justify-center space-x-2">
 							<button
-								className="h-8 w-8 shrink-0 rounded-full"
-								onClick={() => onClick(-10)}
-								disabled={goal <= 200}
+								className={`p-4 flex flex-row items-center gap-x-3 border w-1/2 border-primary ${
+									vote === 'upvote' && 'bg-primary'
+								} shrink-0 rounded-xl`}
+								onClick={() => {
+									setVote('upvote')
+								}}
 							>
-								<MinusIcon className="h-4 w-4" />
-								<span className="sr-only">Decrease</span>
+								<DoubleArrowUpIcon className={`${vote === 'upvote' && 'text-white'} h-10 w-20`} />
+								<div className="flex flex-col w-full items-center justify-center">
+									<p
+										className={`${
+											vote === 'upvote' ? 'text-white' : 'text-primary'
+										} text-3xl font-bold`}
+									>
+										{upvote}
+									</p>
+									<span
+										className={`${vote === 'upvote' ? 'text-white' : 'text-primary'} font-semibold`}
+									>
+										Upvote
+									</span>
+								</div>
 							</button>
-							<div className="flex-1 text-center">
-								<div className="text-7xl font-bold tracking-tighter">{goal}</div>
-								<div className="text-[0.70rem] uppercase text-muted-foreground">Myriad Points</div>
-							</div>
 							<button
-								className="h-8 w-8 shrink-0 rounded-full"
-								onClick={() => onClick(10)}
-								disabled={goal >= 400}
+								className={`p-4 flex flex-row items-center gap-x-3 border w-1/2 border-primary ${
+									vote === 'downvote' && 'bg-primary'
+								}  shrink-0 rounded-xl`}
+								onClick={() => {
+									setVote('downvote')
+								}}
 							>
-								<PlusIcon className="h-4 w-4" />
-								<span className="sr-only">Increase</span>
+								<DoubleArrowDownIcon className={`${vote === 'downvote' && 'text-white'} h-10 w-20`} />
+								<div className="flex flex-col w-full items-center justify-center">
+									<p
+										className={`${
+											vote === 'downvote' ? 'text-white' : 'text-primary'
+										} text-3xl font-bold`}
+									>
+										{downvote}
+									</p>
+									<span
+										className={`${
+											vote === 'downvote' ? 'text-white' : 'text-primary'
+										}  font-semibold`}
+									>
+										Downvote
+									</span>
+								</div>
 							</button>
 						</div>
 						<div className="mt-3 h-[120px]">
@@ -108,7 +148,7 @@ const ProposalDrawer = (props: { proposal: Proposal }) => {
 											{
 												fill: 'hsl(var(--foreground))',
 												opacity: 0.9,
-											} as React.CSSProperties
+											} as any
 										}
 									/>
 								</BarChart>
@@ -116,9 +156,26 @@ const ProposalDrawer = (props: { proposal: Proposal }) => {
 						</div>
 					</div>
 					<DrawerFooter>
-						<button>Submit</button>
+						<button
+							className="py-3 px-4 inline-flex items-center justify-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-[#1B1F3B] shadow-sm text-white hover:bg-black  disabled:opacity-50 disabled:pointer-events-none"
+							onClick={() => {
+								if (vote && identity?.commitment) {
+									handleSubmit()
+								} else {
+									if (!identity?.commitment) {
+										toast.error('Please sign in with Farcaster')
+										return
+									}
+									toast.error('Please cast your vote')
+								}
+							}}
+						>
+							Submit
+						</button>
 						<DrawerClose asChild>
-							<button>Cancel</button>
+							<button className="py-3 px-4 inline-flex items-center justify-center gap-x-2 text-sm font-semibold rounded-lg border border-[#1B1F3B] shadow-sm text-primary hover:text-white hover:bg-black  disabled:opacity-50 disabled:pointer-events-none">
+								Cancel
+							</button>
 						</DrawerClose>
 					</DrawerFooter>
 				</div>

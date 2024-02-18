@@ -10,6 +10,7 @@ declare module 'common' {
         description?: string;
         dao: string;
         expiry?: Date;
-        votes?: number;
+        upvote: number;
+        downvote: number;
     }
 }

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Proposal } from 'common'
-import React, { useEffect, useState } from 'react'
 import ProposalDrawer from './ProposalDrawer'
+import React, { useEffect, useState } from 'react'
 
 const Timeline = (props: any) => {
 	const { dao } = props
@@ -60,7 +60,11 @@ const Timeline = (props: any) => {
 									type="button"
 									className="mt-1 -ms-1 p-1 relative z-10 inline-flex items-center gap-x-2 text-sm rounded-lg border border-transparent font-semibold text-violet-500 hover:bg-white hover:shadow-sm disabled:opacity-50 disabled:pointer-events-none"
 								>
-									{proposal.votes} {proposal.votes === 1 || proposal.votes === 0 ? 'Vote' : 'Votes'}
+									{proposal.upvote + proposal.downvote}{' '}
+									{proposal.upvote + proposal.downvote === 0 ||
+									proposal.upvote + proposal.downvote === 1
+										? 'Vote'
+										: 'Votes'}
 								</button>
 							</div>
 							<div className="inline-flex place-self-center m-3 flex-col h-fit gap-1">
@@ -68,7 +72,7 @@ const Timeline = (props: any) => {
 									Cast
 									<Image alt="farcaster logo" src="/farcaster.svg" width={20} height={20} />
 								</button>
-								{/* <ProposalDrawer proposal={proposal} /> */}
+								<ProposalDrawer upvote={proposal.upvote} downvote={proposal.downvote} dao={dao} />
 							</div>
 							<div className="inline-flex place-self-center m-3 flex-col h-fit border border-gray-200 bg-secondary shadow-sm rounded-full p-0.5">
 								<button
