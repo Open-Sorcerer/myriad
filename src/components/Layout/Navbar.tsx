@@ -11,10 +11,6 @@ export default function Navbar() {
             title: 'Home',
             path: '/home',
         },
-        {
-            title: 'VoteUI',
-            path: '/GenericCard',
-        },
     ]
     const setIdentity = useStore(state => state.setIdentity)
 
@@ -29,10 +25,8 @@ export default function Navbar() {
                             href="/"
                             className="mr-2 flex flex-row w-full items-center justify-center md:w-auto lg:mr-6 divide-x"
                         >
-                            {/*<LogoSquare className='w-5 h-5 relative p-2'/>*/}
                             <div
-                                className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block p-2 text-black">
-                                {/* {process.env.SITE_NAME} */}
+                                className="ml-2 flex-none text-2xl font-semibold uppercase md:hidden lg:block p-2 text-violet-600">
                                 Myriad
                             </div>
                         </Link>
