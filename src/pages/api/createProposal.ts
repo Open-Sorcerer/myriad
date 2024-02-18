@@ -16,7 +16,8 @@ const createProposalHandler = async (req: NextApiRequest, res: NextApiResponse) 
 		description,
 		dao,
 		expiry,
-		votes: 0,
+		upvote: 0,
+		downvote: 0,
 	})
 
 	if (error) {
