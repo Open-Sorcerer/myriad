@@ -54,9 +54,9 @@ const DaoGrid = (props: { myDAOs: boolean }) => {
 						<div className="bg-white shadow-lg rounded-lg overflow-hidden" key={dao.id}>
 							<img className="w-full h-auto object-cover object-center" src={dao.image} alt={dao.name} />
 							<div className="p-4">
-								<p className="text-indigo-500 text-xl text-center font-semibold">{dao.name}</p>
+								<p className="text-primary text-xl text-center font-semibold">{dao.name}</p>
 								<button
-									className="bg-indigo-500 p-2 w-full rounded-lg mt-2 text-white"
+									className="bg-primary hover:bg-black p-2 w-full rounded-lg mt-2 text-white"
 									onClick={() => joinDAO(dao.id)}
 								>
 									Join
