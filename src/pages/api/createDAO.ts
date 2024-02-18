@@ -10,13 +10,12 @@ interface BodyType {
 }
 
 const createDAOHandler = async (req: NextApiRequest, res: NextApiResponse) => {
-	const { name, description, image, dao, creator } = req.body as BodyType
+	const { name, description, image, dao } = req.body as BodyType
 
 	const { error } = await client.from('DAO').insert({
 		name,
 		description,
 		image,
-		creator: creator,
 		id: dao,
 	})
 

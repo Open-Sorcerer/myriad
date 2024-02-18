@@ -13,7 +13,7 @@ const createDAOHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 		)
 	`
 		)
-		.eq('member_id', id as string)
+		.neq('member_id', id as string)
 
 	if (error) {
 		return res.status(500).json({ error })
@@ -22,7 +22,7 @@ const createDAOHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const DAOs = DAOList.map((dao: any) => {
 		const { DAO, ...rest } = dao
 		return { ...DAO, ...rest }
-	});
+	})
 
 	return res.status(200).json({ data: DAOs })
 }

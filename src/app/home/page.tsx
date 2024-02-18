@@ -1,7 +1,8 @@
 'use client'
-import DAOGrid from './DAOGrid'
 import { useState } from 'react'
 import CreateDAO from './CreateDAO'
+import MyDAOGrid from './MyDAOGrid'
+import AllDAOGrid from './AllDAOGrid'
 
 const Home = () => {
 	const [search, setSearch] = useState('')
@@ -43,11 +44,11 @@ const Home = () => {
 				</div>
 				<div className="flex flex-col gap-2">
 					<span className="text-2xl font-semibold">My DAOs</span>
-					<DAOGrid myDAOs={false} />
+					<MyDAOGrid />
 				</div>
 				<div className="flex flex-col gap-2">
 					<span className="text-2xl font-semibold">Available DAOs</span>
-					<DAOGrid myDAOs={true} />
+					<AllDAOGrid />
 				</div>
 			</div>
 		</div>

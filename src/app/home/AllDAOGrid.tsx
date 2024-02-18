@@ -9,20 +9,24 @@ interface DAO {
 	id: string
 }
 
-const DaoGrid = (props: { myDAOs: boolean }) => {
+const AllDAOGrid = () => {
 	const { search } = useStore()
 	const [daoList, setDaoList] = React.useState<DAO[]>([])
-	const { identity } = useStore()
+	const { identity, reload } = useStore()
+
+	const fetchData = async () => {
+		const apiResponse = await fetch(`/api/getAllDAOs?id=${identity?.commitment?.toString()}`)
+		const DAOList = (await apiResponse.json()).data as DAO[]
+		setDaoList(DAOList)
+	}
 
 	useEffect(() => {
-		const fetchData = async () => {
-			const apiResponse = await fetch('/api/getDAOs')
-			const DAOList = (await apiResponse.json()).data as DAO[]
-			console.log('🚀 ~ DAOList: ', DAOList)
-			setDaoList(DAOList)
-		}
 		fetchData()
 	}, [])
+
+	useEffect(() => {
+		fetchData()
+	}, [identity, reload])
 
 	const joinDAO = async (id: string) => {
 		await fetch('/api/joinDAO', {
@@ -39,6 +43,7 @@ const DaoGrid = (props: { myDAOs: boolean }) => {
 				const data = await res.json()
 				console.log('🚀 ~ DB response: ', data)
 				toast.success('Joined DAO successfully')
+				fetchData()
 			})
 			.catch(error => {
 				console.error('🚀 ~ DB error: ', error)
@@ -68,4 +73,4 @@ const DaoGrid = (props: { myDAOs: boolean }) => {
 	)
 }
 
-export default DaoGrid
+export default AllDAOGrid
