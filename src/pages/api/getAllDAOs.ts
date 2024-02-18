@@ -4,6 +4,10 @@ import { NextApiRequest, NextApiResponse } from 'next'
 const getAllDAOsHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 	const { id } = req.query
 
+	if (!id) {
+		return res.status(400).json({ error: 'Missing required query parameter: id' })
+	}
+
 	const { data: DAOList, error } = await client
 		.from('DAOMembers')
 		.select(

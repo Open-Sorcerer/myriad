@@ -19,7 +19,6 @@ const AllDAOGrid = () => {
 	const fetchData = async () => {
 		const apiResponse = await fetch(`/api/getAllDAOs?id=${fid}`)
 		const DAOList = (await apiResponse.json()).data as DAO[]
-		console.log(DAOList)
 		setDaoList(DAOList)
 		setLoading(false)
 	}
@@ -73,7 +72,7 @@ const AllDAOGrid = () => {
 						</div>
 					</div>
 				</div>
-			) : daoList.length > 0 ? (
+			) : daoList?.length > 0 ? (
 				daoList
 					.filter(dao => dao.name.toLowerCase().includes(search.toLowerCase()))
 					.map(dao => (
