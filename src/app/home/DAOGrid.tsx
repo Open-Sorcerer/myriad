@@ -18,6 +18,7 @@ const DaoGrid = (props: { myDAOs: boolean }) => {
 		const fetchData = async () => {
 			const apiResponse = await fetch('/api/getDAOs')
 			const DAOList = (await apiResponse.json()).data as DAO[]
+			console.log('🚀 ~ DAOList: ', DAOList)
 			setDaoList(DAOList)
 		}
 		fetchData()
