@@ -1,10 +1,22 @@
+import { client } from '@/utils/db'
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
 export const dynamic = 'force-dynamic'
 
-export async function GET() {
+export async function GET(request: Request) {
+	const { searchParams } = new URL(request.url)
+	const id = searchParams.get('id')
+
+	const { data, error } = await client.from('Proposal').select(`upvote, downvote`).eq('id', id).single()
+
+	console.log(data, error)
+
+	if (error) {
+		return new Response('Not found', { status: 404 })
+	}
+
 	try {
 		return new ImageResponse(
 			(
@@ -23,6 +35,7 @@ export async function GET() {
 						style={{
 							display: 'flex',
 							justifyContent: 'center',
+							flexDirection: 'column',
 							alignItems: 'center',
 							height: '100%',
 							width: '100%',
@@ -30,7 +43,8 @@ export async function GET() {
 							fontSize: '1rem',
 						}}
 					>
-						<h1>Yay! You have successufully voted for Proposal</h1>
+						<h1>Upvote: {data?.upvote}</h1>
+						<h1>Downvote: {data?.downvote}</h1>
 					</div>
 				</div>
 			),

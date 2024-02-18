@@ -1,9 +1,7 @@
 import { useStore } from '@store'
-import { Proposal } from 'common'
 import toast from 'react-hot-toast'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { generateProof } from '@semaphore-protocol/proof'
-import { Bar, BarChart, ResponsiveContainer } from 'recharts'
 import { ChevronRightIcon, DoubleArrowDownIcon, DoubleArrowUpIcon } from '@radix-ui/react-icons'
 import {
 	Drawer,
@@ -139,21 +137,7 @@ function ProposalDrawer(props: any) {
 								</div>
 							</button>
 						</div>
-						<div className="mt-3 h-[120px]">
-							<ResponsiveContainer width="100%" height="100%">
-								<BarChart data={data}>
-									<Bar
-										dataKey="goal"
-										style={
-											{
-												fill: 'hsl(var(--foreground))',
-												opacity: 0.9,
-											} as any
-										}
-									/>
-								</BarChart>
-							</ResponsiveContainer>
-						</div>
+						<div className="mt-3 h-[120px]"></div>
 					</div>
 					<DrawerFooter>
 						<button

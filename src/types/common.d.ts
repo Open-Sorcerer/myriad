@@ -5,24 +5,13 @@ declare module 'common' {
 		image: string
 	}
 
-<<<<<<< Updated upstream
-    export type Proposal = {
-        title: string;
-        description?: string;
-        dao: string;
-        expiry?: Date;
-        upvote: number;
-        downvote: number;
-    }
-}
-=======
 	export type Proposal = {
 		title: string
 		description?: string
 		dao: string
 		expiry?: Date
-		votes?: number
+		upvote: number
+		downvote: number
 		id: string
 	}
 }
->>>>>>> Stashed changes

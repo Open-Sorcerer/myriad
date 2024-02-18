@@ -1,10 +1,11 @@
+import { client } from '@/utils/db'
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
 export const dynamic = 'force-dynamic'
 
-export async function GET() {
+export async function GET(request: Request) {
 	try {
 		return new ImageResponse(
 			(
@@ -30,7 +31,7 @@ export async function GET() {
 							fontSize: '1rem',
 						}}
 					>
-						<h1>Yay! You have successufully voted for Proposal</h1>
+						<h1>Sorry! You can't vote again, you have already voted 😭</h1>
 					</div>
 				</div>
 			),

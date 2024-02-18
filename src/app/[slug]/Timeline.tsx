@@ -69,7 +69,11 @@ const Timeline = (props: any) => {
 								</button>
 							</div>
 							<div className="inline-flex place-self-center m-3 flex-col h-fit gap-1">
-								<button className="inline-flex justify-between items-center py-1 px-3 w-24 h-fit place-self-center gap-2 whitespace-nowrap border border-transparent bg-primary shadow-sm text-white hover:bg-black  disabled:opacity-50 disabled:pointer-events-none rounded-full">
+								<button onClick={() => {
+									 window.open(
+										`https://warpcast.com/~/compose?embeds[]=https://frames.huddle01.com/${proposal.id}`,
+									  );
+								}} className="inline-flex justify-between items-center py-1 px-3 w-24 h-fit place-self-center gap-2 whitespace-nowrap border border-transparent bg-primary shadow-sm text-white hover:bg-black  disabled:opacity-50 disabled:pointer-events-none rounded-full">
 									Cast
 									<Image alt="farcaster logo" src="/farcaster.svg" width={20} height={20} />
 								</button>

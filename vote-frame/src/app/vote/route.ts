@@ -1,5 +1,4 @@
 import { client as dbClient } from '@/utils/db'
-import { Identity } from '@semaphore-protocol/identity'
 import { FrameRequest, getFrameMessage } from '@coinbase/onchainkit'
 
 export const dynamic = 'force-dynamic'
@@ -24,15 +23,29 @@ export async function POST(request: Request) {
 
 	console.log('daoId', daoId)
 
-	const { data: memberData } = await dbClient.from('DAOMembers').select('member_id').eq('dao_id', daoId?.dao).single()
+	const { data: memberData } = (await dbClient
+		.from('DAOMembers')
+		.select('member_id')
+		.eq('member_id', message?.interactor?.fid.toString())
+		.eq('dao_id', daoId?.dao)) as { data: { member_id: string }[] }
+
+	const { data: proposal } = await dbClient
+		.from('Votes')
+		.select('fid')
+		.eq('proposal_id', id)
+		.eq('fid', message?.interactor?.fid.toString())
+
+	if (proposal?.length === 0) {
+		const { error } = await dbClient.from('Votes').insert({
+			proposal_id: id,
+			fid: message?.interactor?.fid.toString(),
+		})
+		console.log(error)
+	}
 
 	console.log('memberData', memberData, message?.interactor?.fid)
 
-	const identity = new Identity('244416')
-
-	console.log('identity', identity.commitment?.toString())
-
-	if (memberData?.member_id !== identity?.commitment?.toString()) {
+	if (memberData?.[0].member_id !== message?.interactor?.fid?.toString()) {
 		try {
 			return new Response(
 				`
@@ -44,6 +57,39 @@ export async function POST(request: Request) {
                     <meta property="og:image" content="${process.env.HOST_URL}/sorry" />
                     <meta name="fc:frame" content="vNext">
                     <meta name="fc:frame:image" content="${process.env.HOST_URL}/sorry">
+                    <meta name="fc:frame:post_url" content="${
+						process.env.HOST_URL
+					}/showResults?id=${id}&time=${Date.now()}">
+                    <meta name="fc:frame:button:1" content="Show Results">
+                </head>
+            <body>
+            </body>
+            </html>
+        `,
+				{
+					headers: {
+						'Content-Type': 'text/html',
+					},
+					status: 200,
+				}
+			)
+		} catch (e: any) {
+			return new Response(e, { status: 500 })
+		}
+	}
+
+	if (proposal?.[0]?.fid === message?.interactor?.fid?.toString()) {
+		try {
+			return new Response(
+				`
+            <!DOCTYPE html>
+            <html>
+                <head>
+                    <title>Create your Proposal</title>
+                    <meta property="og:title" content="After Vote" />
+                    <meta property="og:image" content="${process.env.HOST_URL}/sorryVote" />
+                    <meta name="fc:frame" content="vNext">
+                    <meta name="fc:frame:image" content="${process.env.HOST_URL}/sorryVote">
                     <meta name="fc:frame:post_url" content="${
 						process.env.HOST_URL
 					}/showResults?id=${id}&time=${Date.now()}">

@@ -31,7 +31,7 @@ export async function GET(request: Request) {
 							fontSize: '1rem',
 						}}
 					>
-						<h1>Sorry! You can't vote as you are not a part of this DAO</h1>
+						<h1>Sorry! You can't vote as you are not a part of this DAO 🙁</h1>
 					</div>
 				</div>
 			),

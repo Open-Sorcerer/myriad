@@ -19,6 +19,7 @@ const AllDAOGrid = () => {
 	const fetchData = async () => {
 		const apiResponse = await fetch(`/api/getAllDAOs?id=${fid}`)
 		const DAOList = (await apiResponse.json()).data as DAO[]
+		console.log(DAOList)
 		setDaoList(DAOList)
 		setLoading(false)
 	}
