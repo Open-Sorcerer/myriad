@@ -1,4 +1,5 @@
 'use client'
+import { useStore } from '@store'
 import Timeline from './Timeline'
 import CreateProposal from './CreateProposal'
 import React, { useEffect, useState } from 'react'
@@ -16,18 +17,24 @@ export default function Page({ params }: { params: { slug: string } }): React.JS
 	const [daoName, setDaoName] = useState('')
 	const [daoImage, setDaoImage] = useState('')
 	const [loading, setLoading] = useState<Boolean>(true)
+	const { identity, reload } = useStore()
+
+	const fetchData = async () => {
+		const apiResponse = await fetch('/api/getDAOInfo')
+		const DAOList = (await apiResponse.json()).data as DAO[]
+		const dao = DAOList.find(dao => dao.id === params.slug)
+		setDaoName(dao?.name || 'DAO')
+		setDaoImage(dao?.image || '/preview.png')
+		setLoading(false)
+	}
 
 	useEffect(() => {
-		const fetchData = async () => {
-			const apiResponse = await fetch('/api/getDAOInfo')
-			const DAOList = (await apiResponse.json()).data as DAO[]
-			const dao = DAOList.find(dao => dao.id === params.slug)
-			setDaoName(dao?.name || 'DAO')
-			setDaoImage(dao?.image || '/preview.png')
-			setLoading(false)
-		}
 		fetchData()
 	}, [params.slug])
+
+	useEffect(() => {
+		fetchData()
+	}, [identity, reload])
 
 	return (
 		<div className="w-full h-fit z-0 flex flex-col justify-start items-center gap-10 relative py-24 px-24">
@@ -35,7 +42,7 @@ export default function Page({ params }: { params: { slug: string } }): React.JS
 				<div className="flex flex-row items-center justify-center gap-x-3">
 					{loading ? (
 						<div className="py-3 flex flex-row items-center gap-x-3 animate-pulse">
-							<div className='h-20 w-20 rounded-full bg-gray-300'></div>
+							<div className="h-20 w-20 rounded-full bg-gray-300"></div>
 							<div className="h-5 w-40 bg-gray-300"></div>
 						</div>
 					) : (
