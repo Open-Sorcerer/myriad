@@ -17,6 +17,7 @@ const Timeline = (props: any) => {
 				},
 			})
 			const ProposalList = (await apiResponse.json()).data as Proposal[]
+			console.log(ProposalList)
 			setProposalList(ProposalList)
 			setLoading(false)
 		}

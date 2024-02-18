@@ -19,14 +19,14 @@ const CreateDAO = () => {
 	const [daoDescription, setDaoDescription] = useState('')
 	const [isImageUploading, setIsImageUploading] = useState(false)
 	const [daoImage, setDaoImage] = useState('')
-	const { identity, setReload } = useStore()
+	const { identity, setReload, fid } = useStore()
 
 
 	const joinDAO = async (id: string) => {
 		await fetch('/api/joinDAO', {
 			method: 'POST',
 			body: JSON.stringify({
-				member_id: identity?.commitment?.toString(),
+				member_id: fid,
 				dao_id: id,
 			}),
 			headers: {

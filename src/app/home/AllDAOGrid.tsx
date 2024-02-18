@@ -12,12 +12,12 @@ interface DAO {
 const AllDAOGrid = () => {
 	const { search } = useStore()
 	const [daoList, setDaoList] = useState<DAO[]>([])
-	const { identity, reload } = useStore()
+	const { identity, reload, fid } = useStore()
 	const router = useRouter()
 	const [loading, setLoading] = useState<Boolean>(true)
 
 	const fetchData = async () => {
-		const apiResponse = await fetch(`/api/getAllDAOs?id=${identity?.commitment?.toString()}`)
+		const apiResponse = await fetch(`/api/getAllDAOs?id=${fid}`)
 		const DAOList = (await apiResponse.json()).data as DAO[]
 		setDaoList(DAOList)
 		setLoading(false)
@@ -35,7 +35,7 @@ const AllDAOGrid = () => {
 		await fetch('/api/joinDAO', {
 			method: 'POST',
 			body: JSON.stringify({
-				member_id: identity?.commitment?.toString(),
+				member_id: fid,
 				dao_id: id,
 			}),
 			headers: {

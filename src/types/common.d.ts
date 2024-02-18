@@ -1,10 +1,11 @@
 declare module 'common' {
-    export type DAO = {
-        name: string;
-        description: string;
-        image: string;
-    }
+	export type DAO = {
+		name: string
+		description: string
+		image: string
+	}
 
+<<<<<<< Updated upstream
     export type Proposal = {
         title: string;
         description?: string;
@@ -14,3 +15,14 @@ declare module 'common' {
         downvote: number;
     }
 }
+=======
+	export type Proposal = {
+		title: string
+		description?: string
+		dao: string
+		expiry?: Date
+		votes?: number
+		id: string
+	}
+}
+>>>>>>> Stashed changes

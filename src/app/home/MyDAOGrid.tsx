@@ -11,12 +11,12 @@ interface DAO {
 const MyDAOGrid = () => {
 	const { search } = useStore()
 	const [daoList, setDaoList] = useState<DAO[]>([])
-	const { identity, reload } = useStore()
+	const { fid, reload } = useStore()
 	const [loading, setLoading] = useState<Boolean>(true)
 	const router = useRouter()
 
 	const fetchData = async () => {
-		const apiResponse = await fetch(`/api/getDAOs?id=${identity?.commitment?.toString()}`)
+		const apiResponse = await fetch(`/api/getDAOs?id=${fid}`)
 		const DAOList = (await apiResponse.json()).data as DAO[]
 		setDaoList(DAOList)
 		setLoading(false)
@@ -28,7 +28,7 @@ const MyDAOGrid = () => {
 
 	useEffect(() => {
 		fetchData()
-	}, [identity, reload])
+	}, [fid, reload])
 
 	return (
 		<div className="w-full h-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
@@ -66,7 +66,9 @@ const MyDAOGrid = () => {
 						</div>
 					))
 			) : (
-				<h1 className="text-lg font-medium text-gray-700">{identity?.commitment ? "Please create a new DAO." : "Please sign in first."}</h1>
+				<h1 className="text-lg font-medium text-gray-700">
+					{fid ? 'Please create a new DAO.' : 'Please sign in first.'}
+				</h1>
 			)}
 		</div>
 	)
