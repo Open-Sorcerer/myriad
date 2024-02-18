@@ -19,6 +19,8 @@ Via Farcaster ID, we assign a non custodial identity to the user and allow them 
 
 ## Description
 
+![Flowchart](/flowchart.png)
+
 ### Mission of the Project:
 
 Enable decentralized governance: The project aims to empower individuals to participate in decentralized decision-making processes within DAOs, eliminating the need for centralized control.
