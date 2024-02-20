@@ -100,7 +100,9 @@ const AllDAOGrid = () => {
 						</div>
 					))
 			) : (
-				<h1 className="text-lg font-medium text-gray-700">No DAO has been created yet. Please do the honors</h1>
+				<h1 className="text-lg font-medium text-gray-700">
+					{fid ? 'Please create a new DAO.' : 'Please sign in first.'}
+				</h1>
 			)}
 		</div>
 	)

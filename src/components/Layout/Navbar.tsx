@@ -12,12 +12,8 @@ export default function Navbar() {
 			path: '/home',
 		},
 		{
-			title: 'Dashboard',
-			path: '/dashboard',
-		},
-		{
-			title: 'VoteUI',
-			path: '/GenericCard',
+			title: 'My DAOs',
+			path: '/my-dao',
 		},
 	]
 	const setIdentity = useStore(state => state.setIdentity)
@@ -27,33 +23,33 @@ export default function Navbar() {
 		<>
 			<nav className="flex w-full items-center justify-between p-4 lg:px-6 fixed top-0 z-50 bg-white/50 backdrop-blur bg-blend-color-burn">
 				<div className="block flex-none md:hidden">{/*<HamburgerMenu menu={menu} />*/}</div>
-				<div className="flex w-full justify-between items-center">
+				<div className="flex px-16 w-full justify-between items-center">
 					<div className="flex w-fit">
 						<Link
 							href="/"
 							className="mr-2 flex flex-row w-full items-center justify-center md:w-auto lg:mr-6 divide-x"
 						>
 							{/*<LogoSquare className='w-5 h-5 relative p-2'/>*/}
-							<div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block p-2 text-black">
+							<div className="ml-2 flex-none text-3xl font-bold uppercase md:hidden lg:block p-2 text-primary">
 								{/* {process.env.SITE_NAME} */}
 								Myriad
 							</div>
 						</Link>
-						{menu.length != 0 && (
-							<ul className="hidden gap-6 text-sm md:flex md:items-center">
-								{menu.map(item => (
-									<li key={item.title}>
-										<Link
-											href={item.path}
-											className="text-neutral-700 hover:text-black underline-offset-4 hover:text-black hover:underline"
-										>
-											{item.title}
-										</Link>
-									</li>
-								))}
-							</ul>
-						)}
 					</div>
+					{menu.length != 0 && (
+						<ul className="hidden gap-10 text-sm md:flex md:items-center">
+							{menu.map(item => (
+								<li key={item.title}>
+									<Link
+										href={item.path}
+										className="text-violet-800 text-lg font-medium hover:text-primary hover:font-semibold underline-offset-4 hover:underline"
+									>
+										{item.title}
+									</Link>
+								</li>
+							))}
+						</ul>
+					)}
 					<FarcasterProvider>
 						<div className="inline-flex w-fit right-10">
 							<SignInButton

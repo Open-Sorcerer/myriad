@@ -1,16 +1,16 @@
 'use client'
 import { useState } from 'react'
-import CreateDAO from './CreateDAO'
-import AllDAOGrid from './AllDAOGrid'
+import MyDAOGrid from './MyDAOGrid'
+import CreateDAO from '@app/home/CreateDAO'
 
 const Home = () => {
 	const [search, setSearch] = useState('')
 
 	return (
 		<div className="w-full h-fit z-0 mt-4 flex flex-col justify-start items-center gap-10 relative py-24 px-28">
-			<div className="flex w-full flex-col gap-4">
+			<div className="w-full flex flex-col gap-4">
 				<div className="flex w-full h-full justify-between items-center">
-					<span className="w-full text-primary text-2xl font-semibold">Explore Available DAOs</span>
+					<span className="w-full text-primary text-2xl font-semibold">My DAOs</span>
 					<div className="w-full flex justify-end gap-3 items-center">
 						<div className="w-fit h-full">
 							<div className="relative rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
@@ -43,7 +43,7 @@ const Home = () => {
 					</div>
 				</div>
 				<div className="flex flex-col gap-2">
-					<AllDAOGrid />
+					<MyDAOGrid />
 				</div>
 			</div>
 		</div>
