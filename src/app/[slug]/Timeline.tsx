@@ -2,27 +2,30 @@ import Image from 'next/image'
 import { Proposal } from 'common'
 import ProposalDrawer from './ProposalDrawer'
 import React, { useEffect, useState } from 'react'
+import { useStore } from '@store'
 
 const Timeline = (props: any) => {
 	const { dao } = props
 	const [proposalList, setProposalList] = useState<Proposal[]>([])
 	const [loading, setLoading] = useState<boolean>(true)
+	const { reload} = useStore();
+
+	const fetchData = async () => {
+		const apiResponse = await fetch(`/api/getProposals?dao=${dao}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		const ProposalList = (await apiResponse.json()).data as Proposal[]
+		console.log(ProposalList)
+		setProposalList(ProposalList)
+		setLoading(false)
+	}
 
 	useEffect(() => {
-		const fetchData = async () => {
-			const apiResponse = await fetch(`/api/getProposals?dao=${dao}`, {
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			})
-			const ProposalList = (await apiResponse.json()).data as Proposal[]
-			console.log(ProposalList)
-			setProposalList(ProposalList)
-			setLoading(false)
-		}
 		fetchData()
-	}, [dao])
+	}, [dao, reload])
 
 	return (
 		<div className="w-full bg-white/70 p-8 rounded-lg">

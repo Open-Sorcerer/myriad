@@ -12,12 +12,12 @@ interface DAO {
 const AllDAOGrid = () => {
 	const { search } = useStore()
 	const [daoList, setDaoList] = useState<DAO[]>([])
-	const { identity, reload, fid } = useStore()
+	const { fid, reload } = useStore()
 	const router = useRouter()
 	const [loading, setLoading] = useState<Boolean>(true)
 
 	const fetchData = async () => {
-		const apiResponse = await fetch(`/api/getAllDAOs?id=${fid}`)
+		const apiResponse = await fetch(`/api/getAllDAOs`)
 		const DAOList = (await apiResponse.json()).data as DAO[]
 		setDaoList(DAOList)
 		setLoading(false)
@@ -29,9 +29,21 @@ const AllDAOGrid = () => {
 
 	useEffect(() => {
 		fetchData()
-	}, [identity, reload])
+	}, [reload])
 
 	const joinDAO = async (id: string) => {
+		if (!fid) {
+			toast.error('Please sign in first')
+			return
+		}
+
+		const isMember = await fetch(`/api/checkMember?dao_id=${id}`)
+		const { data } = await isMember.json()
+		if (data.member_id === fid) {
+			toast.error('You are already a member of this DAO')
+			return
+		}
+
 		await fetch('/api/joinDAO', {
 			method: 'POST',
 			body: JSON.stringify({
@@ -45,7 +57,9 @@ const AllDAOGrid = () => {
 			.then(async res => {
 				const data = await res.json()
 				console.log('🚀 ~ DB response: ', data)
-				toast.success('Joined DAO successfully')
+				if (!data.error) {
+					toast.success('Joined DAO successfully')
+				}
 				fetchData()
 			})
 			.catch(error => {

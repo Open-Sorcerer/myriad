@@ -2,9 +2,11 @@
 import { useState } from 'react'
 import CreateDAO from './CreateDAO'
 import AllDAOGrid from './AllDAOGrid'
+import { useStore } from '@store'
 
 const Home = () => {
-	const [search, setSearch] = useState('')
+
+	const { setSearch } = useStore()
 
 	return (
 		<div className="w-full h-fit z-0 mt-4 flex flex-col justify-start items-center gap-10 relative py-24 px-28">

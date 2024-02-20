@@ -65,6 +65,7 @@ function ProposalDrawer(props: any) {
 	const handleSubmit = async () => {
 		try {
 			const fullProof = await generateProof(identity, group, dao, signal)
+			console.log('🚀 ~ fullProof', fullProof)
 		} catch (error) {
 			console.error('🚀 ~ error', error)
 		}
